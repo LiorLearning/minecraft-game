@@ -38,12 +38,12 @@ var QuizPanel = /*#__PURE__*/ function() {
         // Quiz question bank - educational questions on various topic
         this.quizQuestions = [
             {
-                question: "What is 9 × 7?",
+                question: "What is 2 + 3?",
                 answers: [
-                    "56",
-                    "63",
-                    "72",
-                    "81"
+                    "4",
+                    "5",
+                    "6",
+                    "7"
                 ],
                 correctAnswer: 1,
                 reward: {
@@ -52,96 +52,96 @@ var QuizPanel = /*#__PURE__*/ function() {
                 }
             },
             {
-                question: "What is 8 × 7?",
+                question: "What is 5 - 2?",
                 answers: [
-                    "56",
-                    "63",
-                    "72",
-                    "81"
+                    "2",
+                    "3",
+                    "4",
+                    "5"
                 ],
-                correctAnswer: 0,
+                correctAnswer: 1,
                 reward: {
                     type: "strings",
                     amount: 2
                 }
             },
             {
-                question: "What is 56 ÷ 8?",
+                question: "What is 4 × 2?",
                 answers: [
                     "6",
                     "7",
                     "8",
-                    "9"
+                    "10"
                 ],
-                correctAnswer: 1,
+                correctAnswer: 2,
                 reward: {
                     type: "flint",
                     amount: 2
                 }
             },
             {
-                question: "What is 81 ÷ 9?",
+                question: "What is 10 ÷ 2?",
                 answers: [
-                    "7",
-                    "8",
-                    "9",
-                    "10"
-                ],
-                correctAnswer: 2,
-                reward: {
-                    type: "feather",
-                    amount: 2
-                }
-            },
-            {
-                question: "What is 6 × 8?",
-                answers: [
-                    "42",
-                    "46",
-                    "48",
-                    "54"
-                ],
-                correctAnswer: 2,
-                reward: {
-                    type: "sticks",
-                    amount: 2
-                }
-            },
-            {
-                question: "What is 72 ÷ 8?",
-                answers: [
-                    "9",
-                    "8",
-                    "7",
+                    "3",
+                    "4",
+                    "5",
                     "6"
                 ],
-                correctAnswer: 0,
+                correctAnswer: 2,
+                reward: {
+                    type: "feather",
+                    amount: 2
+                }
+            },
+            {
+                question: "What is 3 + 4?",
+                answers: [
+                    "5",
+                    "6",
+                    "7",
+                    "8"
+                ],
+                correctAnswer: 2,
+                reward: {
+                    type: "sticks",
+                    amount: 2
+                }
+            },
+            {
+                question: "What is 6 - 3?",
+                answers: [
+                    "2",
+                    "3",
+                    "4",
+                    "5"
+                ],
+                correctAnswer: 1,
                 reward: {
                     type: "strings",
                     amount: 2
                 }
             },
             {
-                question: "What is 7 × 6?",
+                question: "What is 2 × 3?",
                 answers: [
-                    "42",
-                    "49",
-                    "36",
-                    "48"
+                    "5",
+                    "6",
+                    "7",
+                    "8"
                 ],
-                correctAnswer: 0,
+                correctAnswer: 1,
                 reward: {
                     type: "flint",
                     amount: 2
                 }
             },
             {
-                question: "What is 63 ÷ 7?",
+                question: "What is 8 ÷ 2?",
                 answers: [
-                    "7",
-                    "8",
-                    "9",
-                    "10"
+                    "2",
+                    "3",
+                    "4",
+                    "5"
                 ],
                 correctAnswer: 2,
                 reward: {
@@ -150,26 +150,26 @@ var QuizPanel = /*#__PURE__*/ function() {
                 }
             },
             {
-                question: "What is 9 × 6?",
+                question: "What is 5 + 5?",
                 answers: [
-                    "54",
-                    "56",
-                    "63",
-                    "64"
+                    "8",
+                    "9",
+                    "10",
+                    "11"
                 ],
-                correctAnswer: 0,
+                correctAnswer: 2,
                 reward: {
                     type: "sticks",
                     amount: 2
                 }
             },
             {
-                question: "What is 48 ÷ 6?",
+                question: "What is 9 - 4?",
                 answers: [
-                    "6",
-                    "7",
-                    "8",
-                    "9"
+                    "3",
+                    "4",
+                    "5",
+                    "6"
                 ],
                 correctAnswer: 2,
                 reward: {

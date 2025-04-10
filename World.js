@@ -140,47 +140,36 @@ var World = /*#__PURE__*/ function() {
         {
             key: "generateMiningSpots",
             value: function generateMiningSpots() {
-                var _this = this;
                 // Place mining spots on platforms
-                this.platforms.forEach(function(platform, index) {
+                this.platforms.forEach((platform, index) => {
                     // Skip the ground platform (index 0)
                     if (index === 0) return;
+                    
                     // Determine resource type based on platform position
-                    var resourceType = RESOURCE_TYPES[index % RESOURCE_TYPES.length];
+                    const resourceType = RESOURCE_TYPES[index % RESOURCE_TYPES.length];
+                    
                     // Position mining spot near the platform
-                    var miningSpot = new MiningSpot(platform.x + platform.width / 2 - 20, platform.y - 55, resourceType);
-                    _this.miningSpots.push(miningSpot);
+                    const miningSpot = new MiningSpot(platform.x + platform.width / 2 - 20, platform.y - 55, resourceType);
+                    this.miningSpots.push(miningSpot);
+                    
                     // Add a zombie to guard this mining spot if it doesn't already have one
-                    // Check if there's already a zombie guarding this platform
-                    var hasGuard = false;
-                    var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
-                    try {
-                        for(var _iterator = _this.zombies[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){
-                            var zombie = _step.value;
+                    // But only add to even-numbered platforms to reduce the number of zombies
+                    if (index % 2 === 0) {
+                        // Check if there's already a zombie guarding this platform
+                        let hasGuard = false;
+                        for (const zombie of this.zombies) {
                             if (zombie.platform === platform) {
                                 hasGuard = true;
                                 break;
                             }
                         }
-                    } catch (err) {
-                        _didIteratorError = true;
-                        _iteratorError = err;
-                    } finally{
-                        try {
-                            if (!_iteratorNormalCompletion && _iterator.return != null) {
-                                _iterator.return();
-                            }
-                        } finally{
-                            if (_didIteratorError) {
-                                throw _iteratorError;
-                            }
+                        
+                        // If no guard exists, add one
+                        if (!hasGuard) {
+                            const patrolStart = platform.x + 20;
+                            const patrolEnd = platform.x + platform.width - 20;
+                            this.zombies.push(new Zombie(platform.x + platform.width / 2, patrolStart, patrolEnd, platform));
                         }
-                    }
-                    // If no guard exists, add one
-                    if (!hasGuard) {
-                        var patrolStart = platform.x + 20;
-                        var patrolEnd = platform.x + platform.width - 20;
-                        _this.zombies.push(new Zombie(platform.x + platform.width / 2, patrolStart, patrolEnd, platform));
                     }
                 });
             }
@@ -190,95 +179,28 @@ var World = /*#__PURE__*/ function() {
             value: function generateZombies() {
                 var _this = this;
                 // Add zombies at different locations along the level
-                var zombiePositions = [
-                    {
-                        x: 400,
-                        patrolStart: 300,
-                        patrolEnd: 600
-                    },
-                    {
-                        x: 650,
-                        patrolStart: 550,
-                        patrolEnd: 750
-                    },
-                    {
-                        x: 900,
-                        patrolStart: 800,
-                        patrolEnd: 1100
-                    },
-                    {
-                        x: 1200,
-                        patrolStart: 1100,
-                        patrolEnd: 1350
-                    },
-                    {
-                        x: 1500,
-                        patrolStart: 1400,
-                        patrolEnd: 1750
-                    },
-                    {
-                        x: 1850,
-                        patrolStart: 1750,
-                        patrolEnd: 2000
-                    },
-                    {
-                        x: 2200,
-                        patrolStart: 2050,
-                        patrolEnd: 2350
-                    },
-                    {
-                        x: 2500,
-                        patrolStart: 2400,
-                        patrolEnd: 2650
-                    },
-                    {
-                        x: 2800,
-                        patrolStart: 2650,
-                        patrolEnd: 3000
-                    },
-                    {
-                        x: 3100,
-                        patrolStart: 3000,
-                        patrolEnd: 3200
-                    },
-                    {
-                        x: 3400,
-                        patrolStart: 3250,
-                        patrolEnd: 3550
-                    },
-                    {
-                        x: 3700,
-                        patrolStart: 3600,
-                        patrolEnd: 3800
-                    } // New zombie
+                const zombiePositions = [
+                    { x: 400, patrolStart: 300, patrolEnd: 600 },
+                    { x: 900, patrolStart: 800, patrolEnd: 1100 },
+                    { x: 1500, patrolStart: 1400, patrolEnd: 1750 },
+                    { x: 2200, patrolStart: 2050, patrolEnd: 2350 },
+                    { x: 2800, patrolStart: 2650, patrolEnd: 3000 },
+                    { x: 3400, patrolStart: 3250, patrolEnd: 3550 },
+                    { x: 3700, patrolStart: 3600, patrolEnd: 3800 },
+                    // Removed ~30% of the zombies (removed positions at 650, 1200, 1850, 2500, 3100)
                 ];
+
                 // Create zombie instances on ground level
-                zombiePositions.forEach(function(param) {
-                    var x = param.x, patrolStart = param.patrolStart, patrolEnd = param.patrolEnd;
+                zombiePositions.forEach(({ x, patrolStart, patrolEnd }) => {
                     _this.zombies.push(new Zombie(x, patrolStart, patrolEnd));
                 });
+
                 // Add zombies on platforms to make them more challenging
-                var platformZombies = [
-                    {
-                        platformIndex: 1,
-                        patrolOffset: 20
-                    },
-                    {
-                        platformIndex: 3,
-                        patrolOffset: 20
-                    },
-                    {
-                        platformIndex: 5,
-                        patrolOffset: 20
-                    },
-                    {
-                        platformIndex: 7,
-                        patrolOffset: 20
-                    },
-                    {
-                        platformIndex: 9,
-                        patrolOffset: 20
-                    }
+                const platformZombies = [
+                    { platformIndex: 1, patrolOffset: 20 },
+                    { platformIndex: 5, patrolOffset: 20 },
+                    { platformIndex: 9, patrolOffset: 20 }
+                    // Removed ~40% of platform zombies (removed indices 3 and 7)
                 ];
                 platformZombies.forEach(function(param) {
                     var platformIndex = param.platformIndex, patrolOffset = param.patrolOffset;

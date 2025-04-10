@@ -28,7 +28,7 @@ var Zombie = /*#__PURE__*/ function() {
         this.y = platform ? platform.y - 50 : GROUND_LEVEL - 10; // Adjusted to match visual position of zombie
         this.width = 30; // Slightly wider to match zombie image
         this.height = 50; // Taller to match zombie image
-        this.speed = 2.0; // Slightly reduced speed to compensate for larger size
+        this.speed = 1; // Reduced speed (from 2.0) to make zombies slower
         this.direction = 1; // 1 for right, -1 for left
         // Patrol zone
         this.patrolStart = patrolStart || x - 150;
